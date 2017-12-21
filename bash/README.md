@@ -8,3 +8,7 @@ aws --profile factoryx-prod ec2 authorize-security-group-ingress --group-id sg-8
 ~/utils/aws/aws-revoke-all.sh factoryx-stage sg-4cfb6329 > /dev/null 2>&1 &
 aws --profile factoryx-stage ec2 authorize-security-group-ingress --group-id sg-4cfb6329 --protocol all --port all --cidr `echo $SSH_CLIENT | awk '{ print $1"/32"}'` > /dev/null 2>&1 &
 ```
+
+# doco
+
+http://docs.aws.amazon.com/cli/latest/reference/ec2/revoke-security-group-ingress.html
