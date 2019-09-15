@@ -9,7 +9,7 @@
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress"
             ],
-            "Resource": "arn:aws:ec2:REGION:999999999999:security-group/sg-XXXXXXXX"
+            "Resource": "arn:aws:ec2:REGION:ap-southeast-2:security-group/sg-86d348e3"
         },
         {
             "Effect": "Allow",
