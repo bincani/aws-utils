@@ -1,13 +1,18 @@
+
+# service no longer active
+#$FinalIPAddress = ((Invoke-WebRequest ipv4.myip.dk/api/info/IPv4Address).Content).replace('"',"")
 function Get-ExternalIP {
-    # $FinalIPAddress = (Invoke-WebRequest checkip.dyndns.com).Content -replace "[^\d\.]"
-    $FinalIPAddress = ((Invoke-WebRequest ipv4.myip.dk/api/info/IPv4Address).Content).replace('"',"")    
-    $FinalIPAddress
+    $FinalIPAddress = (Invoke-WebRequest checkip.dyndns.com).Content -replace "[^\d\.]"
+    #Write-Verbose "Get-ExternalIP $FinalIPAddress" -Verbose
+    return $FinalIPAddress
 }
 
 function Grant-SSH-Access([string]$GroupId, [int]$port = 22) {
     $cidrBlocks = New-Object 'collections.generic.list[string]'
     $FinalIPAddress = Get-ExternalIP
-    $cidrBlocks.add($FinalIPAddress + "/32")
+    $FinalIPAddress = -join($FinalIPAddress, "/32")
+    Write-Output "Grant $FinalIPAddress"
+    $cidrBlocks.add($FinalIPAddress)
     $ipPermissions = New-Object Amazon.EC2.Model.IpPermission
     $ipPermissions.IpProtocol = "tcp"
     $ipPermissions.FromPort = $port

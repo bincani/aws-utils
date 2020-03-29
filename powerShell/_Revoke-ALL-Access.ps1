@@ -7,7 +7,7 @@ function Revoke-ALL-Access([string]$GroupId) {
         foreach ($grp in $nestedGrp) {
             Revoke-EC2SecurityGroupIngress -GroupId $EC2SecGrpToDel.GroupId -IpPermission $grp
             $IpPerms = "$($grp.IpRange):$($grp.FromPort)"
-            echo "delete $IpPerms from $($EC2SecGrpToDel.GroupId)"
-        }                
+            Write-Output "delete $IpPerms from $($EC2SecGrpToDel.GroupId)"
+        }
     }
 }
